@@ -144,12 +144,12 @@ def newBlock():
 
 # Deletes full rows and shifts rows downwards
 def clearRow():
-    point = False
+    point = 0
     for x in range(len(grid)):
         if 0 not in grid[x]: # entire row filled with blocks
             del grid[x]
             grid.insert(0,[0]*10) # deletes row and adds new blank one at top
-            point = True # score will be increased
+            point += 1 # score will be increased
     return point
 
 # Prevents block from rotating if there isn't enough room to do so
@@ -258,8 +258,9 @@ while running:
                 blockX = 512 # block is at top centre
                 blockY = 100
             
-            if clearRow():
-                score += 1 # when rows are cleared, adds to score
+            score += clearRow()
+            # if clearRow():
+            #     score += 1 # when rows are cleared, adds to score
 
             writehighscore()
             drawAll()
