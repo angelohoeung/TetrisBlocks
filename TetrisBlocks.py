@@ -188,9 +188,13 @@ def main():
                     # quit() <- Was creating error
                     running = False
                     break
-                if e.key == K_p:
+                if e.key == K_p and not checkLoss(grid, block) and delayD > 0:
                     state = not state # pauses game
-                    screen.blit(pause,(1024/2 - 400,768/2 - 300))
+                    if state:
+                        mixer.music.unpause()
+                    else:
+                        screen.blit(pause,(1024/2 - 400,768/2 - 300))
+                        mixer.music.pause()
                     display.update()
                 elif e.key == K_r and checkLoss(grid, block):
                     score = 0
@@ -201,7 +205,7 @@ def main():
                 else:
                     # state = True
                     if e.key == K_UP:
-                        if not collision(block, blockX, blockY, blockSize, grid, bottom) and not rotateCollision(block, blockX, blockY, blockSize, grid): # rotates only when no collisions
+                        if not collision(block, blockX, blockY, blockSize, grid, bottom) and not rotateCollision(block, blockX, blockY, blockSize, grid) and state:
                             '''if blockY + blockSize*len(rotate()[0]) > 100 + blockSize*20:
                                 blockY = 100 + blockSize*20 - blockSize*len(rotate()[0])   
                             if blockX >= 512 + blockSize*len(rotate()[0]):
