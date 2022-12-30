@@ -1,12 +1,9 @@
 # Tetris Blocks
 # By: Angelo Hoeung
 # This is a simple, pygame version of Tetris that allows players to place randomly generated blocks in a grid and earn points when an entire row is filled
-# This is honestly pretty bad -> It's FULL of global variables
 
 from pygame import *
-from random import *
-from math import *
-from tkinter import *
+from random import choice
 
 def drawAll(block, grid, title, screen, colours, blockX, blockY, blockSize, score, nBlock, lose, music):
     screen.blit(title,(0,0)) # title screen
@@ -84,8 +81,6 @@ def LRcollide(block, blockX, blockY, blockSize, grid):
                         return 2
                 except IndexError:
                     return 0
-    # if collision() or blockX == 512 and blockY == 100: # stops the player from never being able to move in certain instances
-    #     return 0
     return 0
 
 # New random block
